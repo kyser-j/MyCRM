@@ -1,0 +1,19 @@
+@model WebLink
+@{
+    ViewData["Title"] = "Delete link";
+}
+
+<div class="page-header">
+    <h1>Delete link</h1>
+</div>
+
+<div class="panel">
+    <p>Delete link <strong>@Model.Description</strong> (@Model.Link)?</p>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-outline-secondary" href="javascript:history.back()">Cancel</a>
+        </div>
+    </form>
+</div>

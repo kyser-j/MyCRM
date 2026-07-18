@@ -1,0 +1,214 @@
+@model Person
+@{
+    ViewData["Title"] = $"{Model.FirstName} {Model.LastName}".Trim();
+}
+
+<div class="page-header">
+    <h1>@Model.FirstName @Model.LastName</h1>
+    <div class="actions">
+        <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <a class="btn btn-link btn-sm" asp-action="Index">Back to list</a>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-6">
+        <div class="panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="panel-title mb-0">Companies</div>
+                <a class="btn btn-sm btn-outline-primary" asp-controller="CompanyPeople" asp-action="Create" asp-route-personId="@Model.Id">Link company</a>
+            </div>
+            @if (!Model.CompanyPeople.Any())
+            {
+                <p class="empty-state mb-0">Not linked to any companies.</p>
+            }
+            else
+            {
+                <table class="table table-sm mb-0">
+                    <thead><tr><th>Company</th><th>Roles</th><th></th></tr></thead>
+                    <tbody>
+                    @foreach (var cp in Model.CompanyPeople.OrderBy(x => x.Company.Name))
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Companies" asp-action="Details" asp-route-id="@cp.CompanyId">@cp.Company.Name</a>
+                                @if (cp.IsPrimaryContact)
+                                {
+                                    <span class="badge text-bg-primary">Primary</span>
+                                }
+                            </td>
+                            <td>@(string.Join(", ", cp.CompanyPersonRoles.Select(r => r.CompanyRole.Name).DefaultIfEmpty("—")))</td>
+                            <td class="text-end actions">
+                                <a class="btn btn-sm btn-outline-secondary" asp-controller="CompanyPeople" asp-action="Edit" asp-route-id="@cp.Id">Edit</a>
+                                <a class="btn btn-sm btn-outline-danger" asp-controller="CompanyPeople" asp-action="Delete" asp-route-id="@cp.Id">Unlink</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+
+        <div class="panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="panel-title mb-0">Contact info</div>
+                <div class="actions">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Emails" asp-action="Create" asp-route-personId="@Model.Id">Email</a>
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Phones" asp-action="Create" asp-route-personId="@Model.Id">Phone</a>
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="WebLinks" asp-action="Create" asp-route-personId="@Model.Id">Link</a>
+                </div>
+            </div>
+            @if (!Model.EmailAddresses.Any() && !Model.PhoneNumbers.Any() && !Model.WebLinks.Any())
+            {
+                <p class="empty-state mb-0">No contact info yet.</p>
+            }
+            else
+            {
+                @if (Model.EmailAddresses.Any())
+                {
+                    <div class="mb-3">
+                        <div class="meta-label">Emails</div>
+                        <ul class="list-unstyled mb-0">
+                        @foreach (var e in Model.EmailAddresses)
+                        {
+                            <li class="d-flex justify-content-between py-1">
+                                <span>
+                                    <a href="mailto:@e.EmailAddress">@e.EmailAddress</a>
+                                    @if (e.IsPrimary) { <span class="badge text-bg-secondary">Primary</span> }
+                                </span>
+                                <span class="actions">
+                                    <a asp-controller="Emails" asp-action="Edit" asp-route-id="@e.Id">Edit</a>
+                                    <a asp-controller="Emails" asp-action="Delete" asp-route-id="@e.Id" class="text-danger">Delete</a>
+                                </span>
+                            </li>
+                        }
+                        </ul>
+                    </div>
+                }
+                @if (Model.PhoneNumbers.Any())
+                {
+                    <div class="mb-3">
+                        <div class="meta-label">Phones</div>
+                        <ul class="list-unstyled mb-0">
+                        @foreach (var p in Model.PhoneNumbers)
+                        {
+                            <li class="d-flex justify-content-between py-1">
+                                <span>
+                                    @p.PhoneNumber
+                                    @if (p.IsPrimary) { <span class="badge text-bg-secondary">Primary</span> }
+                                </span>
+                                <span class="actions">
+                                    <a asp-controller="Phones" asp-action="Edit" asp-route-id="@p.Id">Edit</a>
+                                    <a asp-controller="Phones" asp-action="Delete" asp-route-id="@p.Id" class="text-danger">Delete</a>
+                                </span>
+                            </li>
+                        }
+                        </ul>
+                    </div>
+                }
+                @if (Model.WebLinks.Any())
+                {
+                    <div>
+                        <div class="meta-label">Links</div>
+                        <ul class="list-unstyled mb-0">
+                        @foreach (var w in Model.WebLinks)
+                        {
+                            <li class="d-flex justify-content-between py-1">
+                                <span><a href="@w.Link" target="_blank" rel="noopener">@w.Description</a></span>
+                                <span class="actions">
+                                    <a asp-controller="WebLinks" asp-action="Edit" asp-route-id="@w.Id">Edit</a>
+                                    <a asp-controller="WebLinks" asp-action="Delete" asp-route-id="@w.Id" class="text-danger">Delete</a>
+                                </span>
+                            </li>
+                        }
+                        </ul>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="panel-title mb-0">Follow-ups</div>
+                <a class="btn btn-sm btn-outline-primary" asp-controller="FollowUps" asp-action="Create" asp-route-personId="@Model.Id">Add</a>
+            </div>
+            @if (!Model.FollowUps.Any())
+            {
+                <p class="empty-state mb-0">No follow-ups.</p>
+            }
+            else
+            {
+                <table class="table table-sm mb-0">
+                    <thead><tr><th>Title</th><th>Due</th><th></th></tr></thead>
+                    <tbody>
+                    @foreach (var f in Model.FollowUps.OrderBy(x => x.IsDone).ThenBy(x => x.DueOn))
+                    {
+                        <tr class="@(f.IsDone ? "text-muted" : "")">
+                            <td>@f.Title @(f.IsDone ? "(done)" : "")</td>
+                            <td>@f.DueOn.ToLocalTime().ToString("g")</td>
+                            <td class="text-end">
+                                <a asp-controller="FollowUps" asp-action="Edit" asp-route-id="@f.Id">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+
+        <div class="panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="panel-title mb-0">Notes</div>
+                <a class="btn btn-sm btn-outline-primary" asp-controller="Notes" asp-action="Create" asp-route-personId="@Model.Id">Add</a>
+            </div>
+            @if (!Model.Notes.Any())
+            {
+                <p class="empty-state mb-0">No notes.</p>
+            }
+            else
+            {
+                @foreach (var n in Model.Notes.OrderByDescending(x => x.CreatedAt))
+                {
+                    <div class="border-bottom py-2">
+                        <div class="small text-muted mb-1">
+                            @n.CreatedAt.ToLocalTime().ToString("g")
+                            · <a asp-controller="Notes" asp-action="Edit" asp-route-id="@n.Id">Edit</a>
+                            · <a asp-controller="Notes" asp-action="Delete" asp-route-id="@n.Id" class="text-danger">Delete</a>
+                        </div>
+                        <div style="white-space: pre-wrap;">@n.Content</div>
+                    </div>
+                }
+            }
+        </div>
+
+        <div class="panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="panel-title mb-0">Correspondence</div>
+                <a class="btn btn-sm btn-outline-primary" asp-controller="Correspondences" asp-action="Create" asp-route-personId="@Model.Id">Log</a>
+            </div>
+            @if (!Model.CorrespondenceRecords.Any())
+            {
+                <p class="empty-state mb-0">No correspondence.</p>
+            }
+            else
+            {
+                <table class="table table-sm mb-0">
+                    <thead><tr><th>When</th><th>Type</th><th>Subject</th></tr></thead>
+                    <tbody>
+                    @foreach (var c in Model.CorrespondenceRecords.OrderByDescending(x => x.OccurredAt).Take(10))
+                    {
+                        <tr>
+                            <td>@c.OccurredAt.ToLocalTime().ToString("g")</td>
+                            <td>@CrmHelpers.DisplayName(c.Type)</td>
+                            <td><a asp-controller="Correspondences" asp-action="Details" asp-route-id="@c.Id">@(c.Subject ?? "(No subject)")</a></td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

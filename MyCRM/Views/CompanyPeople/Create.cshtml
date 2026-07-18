@@ -1,0 +1,62 @@
+@model CompanyPerson
+@{
+    ViewData["Title"] = "Link person to company";
+    var roles = ViewBag.Roles as IEnumerable<CompanyRole> ?? [];
+    var selectedRoles = ViewBag.RoleIds as long[] ?? [];
+}
+
+<div class="page-header">
+    <h1>Link person to company</h1>
+</div>
+
+<div class="panel">
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="CompanyId" class="form-label">Company</label>
+                <select asp-for="CompanyId" class="form-select" asp-items="ViewBag.Companies" required>
+                    <option value="">Select company…</option>
+                </select>
+                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PersonId" class="form-label">Person</label>
+                <select asp-for="PersonId" class="form-select" asp-items="ViewBag.People" required>
+                    <option value="">Select person…</option>
+                </select>
+                <span asp-validation-for="PersonId" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <div class="form-check">
+                    <input asp-for="IsPrimaryContact" class="form-check-input" />
+                    <label asp-for="IsPrimaryContact" class="form-check-label">Primary contact for this company</label>
+                </div>
+            </div>
+            @if (roles.Any())
+            {
+                <div class="col-12">
+                    <div class="meta-label mb-2">Roles</div>
+                    <div class="row">
+                    @foreach (var role in roles)
+                    {
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="roleIds" value="@role.Id" id="role_@role.Id"
+                                       @(selectedRoles.Contains(role.Id) ? "checked" : null) />
+                                <label class="form-check-label" for="role_@role.Id">@role.Name</label>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Link</button>
+            <a class="btn btn-outline-secondary" href="javascript:history.back()">Cancel</a>
+        </div>
+    </form>
+</div>

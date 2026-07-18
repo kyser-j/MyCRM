@@ -1,0 +1,52 @@
+@model Correspondence
+@{
+    ViewData["Title"] = Model.Subject ?? "Correspondence";
+}
+
+<div class="page-header">
+    <h1>@(Model.Subject ?? "(No subject)")</h1>
+    <div class="actions">
+        <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="btn btn-outline-danger btn-sm" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+        <a class="btn btn-link btn-sm" asp-action="Index">Back</a>
+    </div>
+</div>
+
+<div class="panel">
+    <div class="detail-grid mb-3">
+        <div>
+            <div class="meta-label">When</div>
+            <div>@Model.OccurredAt.ToLocalTime().ToString("g")</div>
+        </div>
+        <div>
+            <div class="meta-label">Type</div>
+            <div>@CrmHelpers.DisplayName(Model.Type)</div>
+        </div>
+        <div>
+            <div class="meta-label">Direction</div>
+            <div>@CrmHelpers.DisplayName(Model.Direction)</div>
+        </div>
+        <div>
+            <div class="meta-label">Company</div>
+            <div>
+                @if (Model.Company is not null)
+                {
+                    <a asp-controller="Companies" asp-action="Details" asp-route-id="@Model.CompanyId">@Model.Company.Name</a>
+                }
+                else { <span class="text-muted">—</span> }
+            </div>
+        </div>
+        <div>
+            <div class="meta-label">Person</div>
+            <div>
+                @if (Model.Person is not null)
+                {
+                    <a asp-controller="People" asp-action="Details" asp-route-id="@Model.PersonId">@Model.Person.FirstName @Model.Person.LastName</a>
+                }
+                else { <span class="text-muted">—</span> }
+            </div>
+        </div>
+    </div>
+    <div class="meta-label">Content</div>
+    <div style="white-space: pre-wrap;">@(Model.Content ?? "—")</div>
+</div>

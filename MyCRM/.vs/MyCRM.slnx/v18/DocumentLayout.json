@@ -3,22 +3,22 @@
   "WorkspaceRootPath": "C:\\work\\MyCRM\\MyCRM\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BDF57748-9854-4CB3-8332-6BCAC27C6825}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ECE3AA97-D17C-974F-44C7-9AB260019069}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDF57748-9854-4CB3-8332-6BCAC27C6825}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ECE3AA97-D17C-974F-44C7-9AB260019069}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDF57748-9854-4CB3-8332-6BCAC27C6825}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\correspondence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ECE3AA97-D17C-974F-44C7-9AB260019069}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDF57748-9854-4CB3-8332-6BCAC27C6825}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\note.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ECE3AA97-D17C-974F-44C7-9AB260019069}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\models\\correspondence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDF57748-9854-4CB3-8332-6BCAC27C6825}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\constants\\correspondencetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ECE3AA97-D17C-974F-44C7-9AB260019069}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\constants\\correspondencetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BDF57748-9854-4CB3-8332-6BCAC27C6825}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ECE3AA97-D17C-974F-44C7-9AB260019069}|..\\MyCRM.Data\\MyCRM.Data.csproj|c:\\work\\mycrm\\mycrm.data\\mydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,12 +53,11 @@
               "RelativeToolTip": "..\\MyCRM.Data\\Models\\Person.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-12T20:46:35.633Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-12T20:46:35.633Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Note.cs",
               "DocumentMoniker": "C:\\work\\MyCRM\\MyCRM.Data\\Models\\Note.cs",
               "RelativeDocumentMoniker": "..\\MyCRM.Data\\Models\\Note.cs",
@@ -66,12 +65,11 @@
               "RelativeToolTip": "..\\MyCRM.Data\\Models\\Note.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-12T20:44:42.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-12T20:44:42.321Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Correspondence.cs",
               "DocumentMoniker": "C:\\work\\MyCRM\\MyCRM.Data\\Models\\Correspondence.cs",
               "RelativeDocumentMoniker": "..\\MyCRM.Data\\Models\\Correspondence.cs",
@@ -79,8 +77,7 @@
               "RelativeToolTip": "..\\MyCRM.Data\\Models\\Correspondence.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-12T20:42:55.999Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-12T20:42:55.999Z"
             },
             {
               "$type": "Document",
@@ -92,8 +89,7 @@
               "RelativeToolTip": "..\\MyCRM.Data\\Constants\\CorrespondenceType.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-12T20:43:43.03Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-12T20:43:43.03Z"
             },
             {
               "$type": "Document",
@@ -105,8 +101,7 @@
               "RelativeToolTip": "..\\MyCRM.Data\\MyDbContext.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAuwD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-12T20:29:29.162Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-12T20:29:29.162Z"
             }
           ]
         }

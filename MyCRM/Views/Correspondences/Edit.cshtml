@@ -1,0 +1,55 @@
+@model Correspondence
+@{
+    ViewData["Title"] = "Edit correspondence";
+}
+
+<div class="page-header">
+    <h1>Edit correspondence</h1>
+</div>
+
+<div class="panel">
+    <form asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="OccurredAt" class="form-label">Occurred at</label>
+                <input asp-for="OccurredAt" class="form-control" type="datetime-local" value="@Model.OccurredAt.ToLocalTime().ToString("yyyy-MM-ddTHH:mm")" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Type" class="form-label"></label>
+                <select asp-for="Type" class="form-select" asp-items="ViewBag.Types"></select>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Direction" class="form-label"></label>
+                <select asp-for="Direction" class="form-select" asp-items="ViewBag.Directions"></select>
+            </div>
+            <div class="col-12">
+                <label asp-for="Subject" class="form-label"></label>
+                <input asp-for="Subject" class="form-control" />
+            </div>
+            <div class="col-12">
+                <label asp-for="Content" class="form-label"></label>
+                <textarea asp-for="Content" class="form-control" rows="6"></textarea>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="CompanyId" class="form-label">Company</label>
+                <select asp-for="CompanyId" class="form-select" asp-items="ViewBag.Companies">
+                    <option value="">(None)</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="PersonId" class="form-label">Person</label>
+                <select asp-for="PersonId" class="form-select" asp-items="ViewBag.People">
+                    <option value="">(None)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+        </div>
+    </form>
+</div>

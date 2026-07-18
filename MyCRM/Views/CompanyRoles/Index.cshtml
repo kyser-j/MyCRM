@@ -1,0 +1,40 @@
+@model IEnumerable<CompanyRole>
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<div class="page-header">
+    <h1>Company roles</h1>
+    <a class="btn btn-primary btn-sm" asp-action="Create">New role</a>
+</div>
+
+<div class="panel">
+    <p class="text-muted small">Roles like CEO, Decision Maker, or Champion that you can assign when linking people to companies.</p>
+    @if (!Model.Any())
+    {
+        <p class="empty-state mb-0">No roles yet.</p>
+    }
+    else
+    {
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td class="text-end actions">
+                        <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>

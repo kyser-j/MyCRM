@@ -1,0 +1,60 @@
+@model CompanyPerson
+@{
+    ViewData["Title"] = "Edit company link";
+    var roles = ViewBag.Roles as IEnumerable<CompanyRole> ?? [];
+    var selectedRoles = ViewBag.RoleIds as long[] ?? [];
+}
+
+<div class="page-header">
+    <h1>Edit company link</h1>
+</div>
+
+<div class="panel">
+    <p class="mb-3">
+        <strong>@Model.Person.FirstName @Model.Person.LastName</strong>
+        at
+        <strong>@Model.Company.Name</strong>
+    </p>
+
+    <form asp-action="Edit" method="post">
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CompanyId" />
+        <input type="hidden" asp-for="PersonId" />
+
+        <div class="mb-3">
+            <div class="form-check">
+                <input asp-for="IsPrimaryContact" class="form-check-input" />
+                <label asp-for="IsPrimaryContact" class="form-check-label">Primary contact for this company</label>
+            </div>
+        </div>
+
+        @if (roles.Any())
+        {
+            <div class="mb-3">
+                <div class="meta-label mb-2">Roles</div>
+                <div class="row">
+                @foreach (var role in roles)
+                {
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="roleIds" value="@role.Id" id="role_@role.Id"
+                                   @(selectedRoles.Contains(role.Id) ? "checked" : null) />
+                            <label class="form-check-label" for="role_@role.Id">@role.Name</label>
+                        </div>
+                    </div>
+                }
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="text-muted">No roles defined yet. <a asp-controller="CompanyRoles" asp-action="Create">Create one</a>.</p>
+        }
+
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a class="btn btn-outline-secondary" asp-controller="Companies" asp-action="Details" asp-route-id="@Model.CompanyId">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,68 @@
+@model IEnumerable<Company>
+@{
+    ViewData["Title"] = "Companies";
+    var search = ViewBag.Search as string;
+}
+
+<div class="page-header">
+    <h1>Companies</h1>
+    <a class="btn btn-primary btn-sm" asp-action="Create">New company</a>
+</div>
+
+<div class="panel">
+    <form method="get" class="row g-2 align-items-end mb-3">
+        <div class="col-md-5">
+            <label class="form-label" for="q">Search</label>
+            <input class="form-control" id="q" name="q" value="@search" placeholder="Name, city…" />
+        </div>
+        <div class="col-md-4">
+            <label class="form-label" for="status">Status</label>
+            <select class="form-select" id="status" name="status" asp-items="ViewBag.StatusFilter"></select>
+        </div>
+        <div class="col-md-3 actions">
+            <button type="submit" class="btn btn-outline-secondary">Filter</button>
+            <a class="btn btn-link" asp-action="Index">Clear</a>
+        </div>
+    </form>
+
+    @if (!Model.Any())
+    {
+        <p class="empty-state mb-0">No companies found.</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Industry</th>
+                        <th>Location</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a asp-action="Details" asp-route-id="@item.Id">@item.Name</a></td>
+                        <td><span class="badge text-bg-secondary badge-status">@CrmHelpers.DisplayName(item.Status)</span></td>
+                        <td>@(item.Industry.HasValue ? CrmHelpers.DisplayName(item.Industry.Value) : "—")</td>
+                        <td>
+                            @{
+                                var loc = string.Join(", ", new[] { item.City, item.State, item.Country }.Where(s => !string.IsNullOrWhiteSpace(s)));
+                            }
+                            @(string.IsNullOrEmpty(loc) ? "—" : loc)
+                        </td>
+                        <td class="text-end actions">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

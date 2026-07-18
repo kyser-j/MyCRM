@@ -1,0 +1,16 @@
+@model Person
+@{
+    ViewData["Title"] = "New person";
+}
+
+<div class="page-header">
+    <h1>New person</h1>
+</div>
+
+<div class="panel">
+    <partial name="_Form" model="Model" />
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

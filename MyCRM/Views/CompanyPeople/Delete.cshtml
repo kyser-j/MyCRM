@@ -1,0 +1,22 @@
+@model CompanyPerson
+@{
+    ViewData["Title"] = "Unlink person";
+}
+
+<div class="page-header">
+    <h1>Unlink person</h1>
+</div>
+
+<div class="panel">
+    <p>
+        Unlink <strong>@Model.Person.FirstName @Model.Person.LastName</strong>
+        from <strong>@Model.Company.Name</strong>?
+    </p>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Unlink</button>
+            <a class="btn btn-outline-secondary" asp-controller="Companies" asp-action="Details" asp-route-id="@Model.CompanyId">Cancel</a>
+        </div>
+    </form>
+</div>

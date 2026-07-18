@@ -1,0 +1,20 @@
+@model Note
+@{
+    ViewData["Title"] = "Delete note";
+}
+
+<div class="page-header">
+    <h1>Delete note</h1>
+</div>
+
+<div class="panel">
+    <p>Delete this note?</p>
+    <blockquote class="border-start border-3 ps-3 text-muted" style="white-space: pre-wrap;">@Model.Content</blockquote>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+        </div>
+    </form>
+</div>

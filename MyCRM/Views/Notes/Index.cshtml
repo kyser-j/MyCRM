@@ -1,0 +1,42 @@
+@model IEnumerable<Note>
+@{
+    ViewData["Title"] = "Notes";
+}
+
+<div class="page-header">
+    <h1>Notes</h1>
+    <a class="btn btn-primary btn-sm" asp-action="Create">New note</a>
+</div>
+
+<div class="panel">
+    @if (!Model.Any())
+    {
+        <p class="empty-state mb-0">No notes yet.</p>
+    }
+    else
+    {
+        @foreach (var item in Model)
+        {
+            <div class="border-bottom py-3">
+                <div class="d-flex justify-content-between gap-2 mb-1">
+                    <div class="small text-muted">
+                        @item.CreatedAt.ToLocalTime().ToString("g")
+                        @if (item.Company is not null)
+                        {
+                            <text>· <a asp-controller="Companies" asp-action="Details" asp-route-id="@item.CompanyId">@item.Company.Name</a></text>
+                        }
+                        @if (item.Person is not null)
+                        {
+                            <text>· <a asp-controller="People" asp-action="Details" asp-route-id="@item.PersonId">@item.Person.FirstName @item.Person.LastName</a></text>
+                        }
+                    </div>
+                    <div class="actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger">Delete</a>
+                    </div>
+                </div>
+                <div style="white-space: pre-wrap;">@item.Content</div>
+            </div>
+        }
+    }
+</div>

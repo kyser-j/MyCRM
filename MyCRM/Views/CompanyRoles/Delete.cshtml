@@ -1,0 +1,19 @@
+@model CompanyRole
+@{
+    ViewData["Title"] = "Delete role";
+}
+
+<div class="page-header">
+    <h1>Delete role</h1>
+</div>
+
+<div class="panel">
+    <p>Delete role <strong>@Model.Name</strong>?</p>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\work\\MyCRM\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{78E4231C-E2B8-41E0-ED27-49C9572E0F6D}|MyCRM\\MyCRM.csproj|c:\\work\\mycrm\\mycrm\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{78E4231C-E2B8-41E0-ED27-49C9572E0F6D}|MyCRM\\MyCRM.csproj|solutionrelative:mycrm\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E4231C-E2B8-41E0-ED27-49C9572E0F6D}|MyCRM\\MyCRM.csproj|c:\\work\\mycrm\\mycrm\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{78E4231C-E2B8-41E0-ED27-49C9572E0F6D}|MyCRM\\MyCRM.csproj|solutionrelative:mycrm\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E4231C-E2B8-41E0-ED27-49C9572E0F6D}|MyCRM\\MyCRM.csproj|c:\\work\\mycrm\\mycrm\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{78E4231C-E2B8-41E0-ED27-49C9572E0F6D}|MyCRM\\MyCRM.csproj|solutionrelative:mycrm\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\work\\MyCRM\\MyCRM\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "MyCRM\\appsettings.Development.json",
+              "ToolTip": "C:\\work\\MyCRM\\MyCRM\\appsettings.Development.json",
+              "RelativeToolTip": "MyCRM\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-17T16:14:16.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\work\\MyCRM\\MyCRM\\appsettings.json",
+              "RelativeDocumentMoniker": "MyCRM\\appsettings.json",
+              "ToolTip": "C:\\work\\MyCRM\\MyCRM\\appsettings.json",
+              "RelativeToolTip": "MyCRM\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-17T16:14:13.874Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\work\\MyCRM\\MyCRM\\Dockerfile",
+              "RelativeDocumentMoniker": "MyCRM\\Dockerfile",
+              "ToolTip": "C:\\work\\MyCRM\\MyCRM\\Dockerfile",
+              "RelativeToolTip": "MyCRM\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-07-17T16:06:47.629Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

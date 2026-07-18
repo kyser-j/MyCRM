@@ -1,0 +1,62 @@
+@model Company
+
+<form asp-action="@(Model.Id == 0 ? "Create" : "Edit")" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row g-3">
+        <div class="col-md-8">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" required />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="EmployeeCount" class="form-label">Employees</label>
+            <input asp-for="EmployeeCount" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Status" class="form-label"></label>
+            <select asp-for="Status" class="form-select" asp-items="ViewBag.Statuses"></select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Source" class="form-label"></label>
+            <select asp-for="Source" class="form-select" asp-items="ViewBag.Sources"></select>
+        </div>
+        <div class="col-md-4">
+            <label asp-for="Industry" class="form-label"></label>
+            <select asp-for="Industry" class="form-select" asp-items="ViewBag.Industries"></select>
+        </div>
+        <div class="col-12">
+            <label asp-for="Street" class="form-label"></label>
+            <input asp-for="Street" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="City" class="form-label"></label>
+            <input asp-for="City" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="State" class="form-label"></label>
+            <input asp-for="State" class="form-control" />
+        </div>
+        <div class="col-md-3">
+            <label asp-for="PostalCode" class="form-label">Postal code</label>
+            <input asp-for="PostalCode" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label asp-for="Country" class="form-label"></label>
+            <input asp-for="Country" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        @if (Model.Id == 0)
+        {
+            <a class="btn btn-outline-secondary" asp-action="Index">Cancel</a>
+        }
+        else
+        {
+            <a class="btn btn-outline-secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+        }
+    </div>
+</form>

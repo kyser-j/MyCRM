@@ -1,0 +1,62 @@
+@model IEnumerable<Correspondence>
+@{
+    ViewData["Title"] = "Correspondence";
+}
+
+<div class="page-header">
+    <h1>Correspondence</h1>
+    <a class="btn btn-primary btn-sm" asp-action="Create">Log correspondence</a>
+</div>
+
+<div class="panel">
+    @if (!Model.Any())
+    {
+        <p class="empty-state mb-0">No correspondence logged yet.</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>When</th>
+                        <th>Type</th>
+                        <th>Direction</th>
+                        <th>Subject</th>
+                        <th>Related</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.OccurredAt.ToLocalTime().ToString("g")</td>
+                        <td>@CrmHelpers.DisplayName(item.Type)</td>
+                        <td>@CrmHelpers.DisplayName(item.Direction)</td>
+                        <td><a asp-action="Details" asp-route-id="@item.Id">@(item.Subject ?? "(No subject)")</a></td>
+                        <td>
+                            @if (item.Company is not null)
+                            {
+                                <a asp-controller="Companies" asp-action="Details" asp-route-id="@item.CompanyId">@item.Company.Name</a>
+                            }
+                            else if (item.Person is not null)
+                            {
+                                <a asp-controller="People" asp-action="Details" asp-route-id="@item.PersonId">@item.Person.FirstName @item.Person.LastName</a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">—</span>
+                            }
+                        </td>
+                        <td class="text-end actions">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

@@ -1,0 +1,84 @@
+@model IEnumerable<FollowUp>
+@{
+    ViewData["Title"] = "Follow-ups";
+    bool? done = ViewBag.DoneFilter as bool?;
+}
+
+<div class="page-header">
+    <h1>Follow-ups</h1>
+    <a class="btn btn-primary btn-sm" asp-action="Create">New follow-up</a>
+</div>
+
+<div class="panel">
+    <div class="actions mb-3">
+        <a class="btn btn-sm @(done is null ? "btn-secondary" : "btn-outline-secondary")" asp-action="Index">All</a>
+        <a class="btn btn-sm @(done == false ? "btn-secondary" : "btn-outline-secondary")" asp-action="Index" asp-route-done="false">Open</a>
+        <a class="btn btn-sm @(done == true ? "btn-secondary" : "btn-outline-secondary")" asp-action="Index" asp-route-done="true">Done</a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <p class="empty-state mb-0">No follow-ups found.</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Due</th>
+                        <th>Related</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    var overdue = !item.IsDone && item.DueOn < DateTimeOffset.UtcNow;
+                    <tr>
+                        <td><a asp-action="Edit" asp-route-id="@item.Id">@item.Title</a></td>
+                        <td class="@(overdue ? "text-danger fw-semibold" : "")">@item.DueOn.ToLocalTime().ToString("g")</td>
+                        <td>
+                            @if (item.Company is not null)
+                            {
+                                <a asp-controller="Companies" asp-action="Details" asp-route-id="@item.CompanyId">@item.Company.Name</a>
+                            }
+                            else if (item.Person is not null)
+                            {
+                                <a asp-controller="People" asp-action="Details" asp-route-id="@item.PersonId">@item.Person.FirstName @item.Person.LastName</a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">—</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsDone)
+                            {
+                                <span class="badge text-bg-success">Done</span>
+                            }
+                            else if (overdue)
+                            {
+                                <span class="badge text-bg-danger">Overdue</span>
+                            }
+                            else
+                            {
+                                <span class="badge text-bg-secondary">Open</span>
+                            }
+                        </td>
+                        <td class="text-end actions">
+                            <form asp-action="ToggleDone" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">@(item.IsDone ? "Reopen" : "Done")</button>
+                            </form>
+                            <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

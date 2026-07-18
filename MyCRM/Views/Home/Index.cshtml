@@ -1,8 +1,119 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-header">
+    <h1>Dashboard</h1>
+    <div class="actions">
+        <a class="btn btn-primary btn-sm" asp-controller="Companies" asp-action="Create">New company</a>
+        <a class="btn btn-outline-primary btn-sm" asp-controller="People" asp-action="Create">New person</a>
+        <a class="btn btn-outline-secondary btn-sm" asp-controller="FollowUps" asp-action="Create">New follow-up</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-value">@Model.CompanyCount</div>
+            <div class="stat-label">Companies</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-value">@Model.PeopleCount</div>
+            <div class="stat-label">People</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-value">@Model.OpenFollowUps</div>
+            <div class="stat-label">Open follow-ups</div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="stat-card">
+            <div class="stat-value text-danger">@Model.OverdueFollowUps</div>
+            <div class="stat-label">Overdue</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-lg-7">
+        <div class="panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="panel-title mb-0">Upcoming follow-ups</div>
+                <a asp-controller="FollowUps" asp-action="Index" asp-route-done="false">View all</a>
+            </div>
+            @if (Model.UpcomingFollowUps.Count == 0)
+            {
+                <p class="empty-state mb-0">No open follow-ups.</p>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-sm mb-0">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Due</th>
+                                <th>Related</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var f in Model.UpcomingFollowUps)
+                        {
+                            var overdue = !f.IsDone && f.DueOn < DateTimeOffset.UtcNow;
+                            <tr>
+                                <td>
+                                    <a asp-controller="FollowUps" asp-action="Edit" asp-route-id="@f.Id">@f.Title</a>
+                                </td>
+                                <td class="@(overdue ? "text-danger fw-semibold" : "")">@f.DueOn.ToLocalTime().ToString("g")</td>
+                                <td>
+                                    @if (f.Company is not null)
+                                    {
+                                        <a asp-controller="Companies" asp-action="Details" asp-route-id="@f.CompanyId">@f.Company.Name</a>
+                                    }
+                                    else if (f.Person is not null)
+                                    {
+                                        <a asp-controller="People" asp-action="Details" asp-route-id="@f.PersonId">@f.Person.FirstName @f.Person.LastName</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted">—</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="panel">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="panel-title mb-0">Recent companies</div>
+                <a asp-controller="Companies" asp-action="Index">View all</a>
+            </div>
+            @if (Model.RecentCompanies.Count == 0)
+            {
+                <p class="empty-state mb-0">No companies yet. <a asp-controller="Companies" asp-action="Create">Add one</a>.</p>
+            }
+            else
+            {
+                <ul class="list-unstyled mb-0">
+                @foreach (var c in Model.RecentCompanies)
+                {
+                    <li class="d-flex justify-content-between py-2 border-bottom">
+                        <a asp-controller="Companies" asp-action="Details" asp-route-id="@c.Id">@c.Name</a>
+                        <span class="badge text-bg-secondary badge-status">@CrmHelpers.DisplayName(c.Status)</span>
+                    </li>
+                }
+                </ul>
+            }
+        </div>
+    </div>
 </div>
