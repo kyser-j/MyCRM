@@ -75,13 +75,13 @@ public class MyDbContext : DbContext
                 .OnDelete(DeleteBehavior.SetNull);
 
             // At most one primary email per company and per person.
-            entity.HasIndex(e => e.CompanyId, "IX_Emails_CompanyId_Primary")
+            entity.HasIndex(e => e.CompanyId, "ix_emails_company_id_primary")
                 .IsUnique()
-                .HasFilter("\"IsPrimary\" AND \"CompanyId\" IS NOT NULL");
+                .HasFilter("\"is_primary\" AND \"company_id\" IS NOT NULL");
 
-            entity.HasIndex(e => e.PersonId, "IX_Emails_PersonId_Primary")
+            entity.HasIndex(e => e.PersonId, "ix_emails_person_id_primary")
                 .IsUnique()
-                .HasFilter("\"IsPrimary\" AND \"PersonId\" IS NOT NULL");
+                .HasFilter("\"is_primary\" AND \"person_id\" IS NOT NULL");
         });
 
         modelBuilder.Entity<Phone>(entity =>
@@ -97,13 +97,13 @@ public class MyDbContext : DbContext
                 .OnDelete(DeleteBehavior.SetNull);
 
             // At most one primary phone per company and per person.
-            entity.HasIndex(ph => ph.CompanyId, "IX_Phones_CompanyId_Primary")
+            entity.HasIndex(ph => ph.CompanyId, "ix_phones_company_id_primary")
                 .IsUnique()
-                .HasFilter("\"IsPrimary\" AND \"CompanyId\" IS NOT NULL");
+                .HasFilter("\"is_primary\" AND \"company_id\" IS NOT NULL");
 
-            entity.HasIndex(ph => ph.PersonId, "IX_Phones_PersonId_Primary")
+            entity.HasIndex(ph => ph.PersonId, "ix_phones_person_id_primary")
                 .IsUnique()
-                .HasFilter("\"IsPrimary\" AND \"PersonId\" IS NOT NULL");
+                .HasFilter("\"is_primary\" AND \"person_id\" IS NOT NULL");
         });
 
         modelBuilder.Entity<WebLink>(entity =>

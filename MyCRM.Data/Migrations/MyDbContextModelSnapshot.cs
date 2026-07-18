@@ -26,76 +26,95 @@ namespace MyCRM.Data.Migrations
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("City")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("city");
 
                     b.Property<string>("Country")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("country");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<int?>("EmployeeCount")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("employee_count");
 
                     b.Property<int?>("Industry")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("industry");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<string>("PostalCode")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("postal_code");
 
                     b.Property<int>("Source")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("source");
 
                     b.Property<string>("State")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("state");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("status");
 
                     b.Property<string>("Street")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("street");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Status");
 
-                    b.ToTable("Companies");
+                    b.ToTable("companies");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.CompanyPerson", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_id");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<bool>("IsPrimaryContact")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_primary_contact");
 
                     b.Property<long>("PersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("person_id");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -104,28 +123,33 @@ namespace MyCRM.Data.Migrations
                     b.HasIndex("CompanyId", "PersonId")
                         .IsUnique();
 
-                    b.ToTable("CompanyPeople");
+                    b.ToTable("company_people");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.CompanyPersonRole", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long>("CompanyPersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_person_id");
 
                     b.Property<long>("CompanyRoleId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_role_id");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -134,69 +158,83 @@ namespace MyCRM.Data.Migrations
                     b.HasIndex("CompanyPersonId", "CompanyRoleId")
                         .IsUnique();
 
-                    b.ToTable("CompanyPersonRoles");
+                    b.ToTable("company_person_roles");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.CompanyRole", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("CompanyRoles");
+                    b.ToTable("company_roles");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.Correspondence", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_id");
 
                     b.Property<string>("Content")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<int>("Direction")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("direction");
 
                     b.Property<DateTimeOffset>("OccurredAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("occurred_at");
 
                     b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("person_id");
 
                     b.Property<string>("Subject")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("subject");
 
                     b.Property<int>("Type")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -204,81 +242,97 @@ namespace MyCRM.Data.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("Correspondences");
+                    b.ToTable("correspondences");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.Email", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_id");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("EmailAddress")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("email_address");
 
                     b.Property<bool>("IsPrimary")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_primary");
 
                     b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("person_id");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "CompanyId" }, "IX_Emails_CompanyId_Primary")
+                    b.HasIndex(new[] { "CompanyId" }, "ix_emails_company_id_primary")
                         .IsUnique()
-                        .HasFilter("\"IsPrimary\" AND \"CompanyId\" IS NOT NULL");
+                        .HasFilter("\"is_primary\" AND \"company_id\" IS NOT NULL");
 
-                    b.HasIndex(new[] { "PersonId" }, "IX_Emails_PersonId_Primary")
+                    b.HasIndex(new[] { "PersonId" }, "ix_emails_person_id_primary")
                         .IsUnique()
-                        .HasFilter("\"IsPrimary\" AND \"PersonId\" IS NOT NULL");
+                        .HasFilter("\"is_primary\" AND \"person_id\" IS NOT NULL");
 
-                    b.ToTable("Emails");
+                    b.ToTable("emails");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.FollowUp", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_id");
 
                     b.Property<DateTimeOffset?>("CompletedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("completed_at");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<DateTimeOffset>("DueOn")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("due_on");
 
                     b.Property<bool>("IsDone")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_done");
 
                     b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("person_id");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -288,32 +342,38 @@ namespace MyCRM.Data.Migrations
 
                     b.HasIndex("IsDone", "DueOn");
 
-                    b.ToTable("FollowUps");
+                    b.ToTable("follow_ups");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.Note", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_id");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("person_id");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -321,102 +381,121 @@ namespace MyCRM.Data.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("Notes");
+                    b.ToTable("notes");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.Person", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("first_name");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("last_name");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
-                    b.ToTable("People");
+                    b.ToTable("people");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.Phone", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_id");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<bool>("IsPrimary")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_primary");
 
                     b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("person_id");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("phone_number");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "CompanyId" }, "IX_Phones_CompanyId_Primary")
+                    b.HasIndex(new[] { "CompanyId" }, "ix_phones_company_id_primary")
                         .IsUnique()
-                        .HasFilter("\"IsPrimary\" AND \"CompanyId\" IS NOT NULL");
+                        .HasFilter("\"is_primary\" AND \"company_id\" IS NOT NULL");
 
-                    b.HasIndex(new[] { "PersonId" }, "IX_Phones_PersonId_Primary")
+                    b.HasIndex(new[] { "PersonId" }, "ix_phones_person_id_primary")
                         .IsUnique()
-                        .HasFilter("\"IsPrimary\" AND \"PersonId\" IS NOT NULL");
+                        .HasFilter("\"is_primary\" AND \"person_id\" IS NOT NULL");
 
-                    b.ToTable("Phones");
+                    b.ToTable("phones");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.WebLink", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<long?>("CompanyId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("company_id");
 
                     b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_at");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<string>("Link")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("link");
 
                     b.Property<long?>("PersonId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("person_id");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_at");
 
                     b.HasKey("Id");
 
@@ -424,7 +503,7 @@ namespace MyCRM.Data.Migrations
 
                     b.HasIndex("PersonId");
 
-                    b.ToTable("WebLinks");
+                    b.ToTable("web_links");
                 });
 
             modelBuilder.Entity("MyCRM.Data.Models.CompanyPerson", b =>

@@ -1,9 +1,14 @@
-﻿namespace MyCRM.Data.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace MyCRM.Data.Models;
+
+[Table("people")]
 public class Person : BaseEntity
 {
+    [Column("first_name")]
     public required string FirstName { get; set; }
 
+    [Column("last_name")]
     public string? LastName { get; set; }
 
     public ICollection<CompanyPerson> CompanyPeople { get; set; } = [];
